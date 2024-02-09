@@ -4,7 +4,6 @@ import { Input } from '../ui/input'
 import { Label } from '../ui/label'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select'
 import { Button } from '../ui/button'
-import { type Category } from '@/types/types'
 
 interface Props {
 

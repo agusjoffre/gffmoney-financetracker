@@ -1,5 +1,6 @@
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
+import { createUser } from '@/lib/controllers/userControl'
 
 export default function Home (): JSX.Element {
   return (
@@ -9,7 +10,7 @@ export default function Home (): JSX.Element {
       <a className= "text-sm md:text-lg text-blue-400" href="https://github.com/agusjoffre" target="_blank" rel="noreferrer">  the repository</a>
       </p>
     <Link href='/dashboard'>
-      <Button
+        <Button
         className='w-full md:w-80 md:py-5 md:rounded-lg bg-blue-400 text-white text-md font-semibold rounded-lg md:font-bold md:text-xl'>
         Start now!
         </Button>

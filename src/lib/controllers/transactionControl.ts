@@ -2,6 +2,7 @@
 import { type Category, type Transaction } from '@/types/types'
 import CategorySchema from '@/db/models/CategorySchema'
 import TransactionSchema from '@/db/models/TransactionSchema'
+import UserSchema from '@/db/models/UserSchema'
 import { auth } from '@clerk/nextjs'
 import { connection } from '@/db/dbConnect'
 
@@ -23,9 +24,35 @@ export const createTransaction = async (formData: FormData): Promise<Transaction
       { $push: { transactions: [newTransaction._id] } },
       { new: true }
     )
-
     await category?.save()
+
+    const user = await UserSchema.findOneAndUpdate({ userID: userId },
+      { $push: { transactions: [newTransaction._id] } }, { new: true })
+    await user.save()
+
     return JSON.parse(JSON.stringify(newTransaction))
+  } catch (err) {
+    const error = err as Error
+    throw new Error(error.message)
+  }
+}
+
+export const getAllTransactions = async (): Promise<Transaction[]> => {
+  try {
+    await connection()
+    const allTransactions = await TransactionSchema.find({ userID: userId })
+    return JSON.parse(JSON.stringify(allTransactions))
+  } catch (err) {
+    const error = err as Error
+    throw new Error(error.message)
+  }
+}
+
+export const getAllCategories = async (): Promise<Category[]> => {
+  try {
+    await connection()
+    const categories = await CategorySchema.find({ userID: userId }).populate('transactions')
+    return JSON.parse(JSON.stringify(categories))
   } catch (err) {
     const error = err as Error
     throw new Error(error.message)
@@ -40,20 +67,13 @@ export const createCategory = async (formData: FormData): Promise<Category> => {
       importance: Number(formData.get('importance'))
     }
     await connection()
-    const newCategory = await new CategorySchema(category).save()
-    console.log(newCategory)
-    return JSON.parse(JSON.stringify(newCategory))
-  } catch (err) {
-    const error = err as Error
-    throw new Error(error.message)
-  }
-}
+    const newCategory = await new CategorySchema(category).save() as Category
 
-export const getAllCategories = async (): Promise<Category[]> => {
-  try {
-    await connection()
-    const categories = await CategorySchema.find({ userID: userId })
-    return JSON.parse(JSON.stringify(categories))
+    const user = await UserSchema.findOneAndUpdate({ userID: userId },
+      { $push: { categories: [newCategory._id] } }, { new: true })
+    await user.save()
+
+    return JSON.parse(JSON.stringify(newCategory))
   } catch (err) {
     const error = err as Error
     throw new Error(error.message)
