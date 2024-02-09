@@ -5,6 +5,8 @@ import TransactionSchema from '@/db/models/TransactionSchema'
 import UserSchema from '@/db/models/UserSchema'
 import { auth } from '@clerk/nextjs'
 import { connection } from '@/db/dbConnect'
+import { revalidatePath } from 'next/cache'
+import { updateUserMoney } from './userControl'
 
 const { userId } = auth()
 
@@ -29,6 +31,10 @@ export const createTransaction = async (formData: FormData): Promise<Transaction
     const user = await UserSchema.findOneAndUpdate({ userID: userId },
       { $push: { transactions: [newTransaction._id] } }, { new: true })
     await user.save()
+
+    await updateUserMoney()
+
+    revalidatePath('/dashboard')
 
     return JSON.parse(JSON.stringify(newTransaction))
   } catch (err) {
@@ -73,7 +79,26 @@ export const createCategory = async (formData: FormData): Promise<Category> => {
       { $push: { categories: [newCategory._id] } }, { new: true })
     await user.save()
 
+    await updateUserMoney()
+
+    revalidatePath('/dashboard')
+
     return JSON.parse(JSON.stringify(newCategory))
+  } catch (err) {
+    const error = err as Error
+    throw new Error(error.message)
+  }
+}
+
+export const getIncomeAndOutcomeTransactions = async (): Promise<{ incomeTransactions: Transaction[], outcomeTransactions: Transaction[] }> => {
+  try {
+    await connection()
+    const incomeTransactions = await TransactionSchema.find({ userID: userId, type: 'income' })
+    const outcomeTransactions = await TransactionSchema.find({ userID: userId, type: 'outcome' })
+    return {
+      incomeTransactions,
+      outcomeTransactions
+    }
   } catch (err) {
     const error = err as Error
     throw new Error(error.message)

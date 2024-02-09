@@ -1,6 +1,5 @@
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
-import { createUser } from '@/lib/controllers/userControl'
 
 export default function Home (): JSX.Element {
   return (
