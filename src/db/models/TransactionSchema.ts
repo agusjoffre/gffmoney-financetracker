@@ -5,9 +5,9 @@ const TransactionSchema = new mongoose.Schema({
   name: { type: String, required: true },
   type: { type: String, required: true },
   amount: { type: Number, required: true },
-  category: { type: mongoose.Schema.Types.ObjectId, ref: 'Category' },
   isMonthly: { type: Boolean },
-  createdAt: { type: Date, default: Date.now }
+  createdAt: { type: Date, default: Date.now },
+  categoryName: { type: String }
 })
 
 // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions

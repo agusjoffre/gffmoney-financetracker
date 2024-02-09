@@ -1,9 +1,11 @@
+import NewTransaction from '@/components/newtransaction/NewTransaction'
+
 interface Props {}
 
 const DashboardPage = (props: Props): JSX.Element => {
   return (
-    <section className="border-2 py-20 border-red-500 h-screen w-full flex flex-col">
-      <h1>this is the dashboard page</h1>
+    <section className=" py-20 h-screen w-full flex flex-col gap-8">
+      <NewTransaction />
     </section>
   )
 }

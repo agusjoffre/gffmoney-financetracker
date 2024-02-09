@@ -1,9 +1,11 @@
+export type TransactionType = 'income' | 'outcome'
+
 export interface Transaction {
   userID?: string
   name: string
-  type: 'income' | 'outcome'
+  type: TransactionType
   amount: number
-  category: string
+  categoryName: string
   isMonthly?: boolean
 }
 
@@ -17,7 +19,7 @@ export interface Category {
 export interface ProjectionTransaction {
   userID?: string
   name: string
-  type: 'income' | 'outcome'
+  type: TransactionType
   amount: number
 }
 
