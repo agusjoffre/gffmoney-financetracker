@@ -10,6 +10,7 @@ export interface Transaction {
 }
 
 export interface Category {
+  _id: Key | null | undefined
   userID?: string
   name: string
   importance?: number

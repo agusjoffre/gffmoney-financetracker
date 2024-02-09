@@ -6,9 +6,11 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '.
 import { Button } from '../ui/button'
 import { types } from '@/lib/constants'
 import { createTransaction } from '@/lib/controllers/transactionControl'
-
-interface Props { }
-const NewTransactionForm = (props: Props): JSX.Element => {
+import { type Category } from '@/types/types'
+interface Props {
+  uniqueCategories: Category[]
+}
+const NewTransactionForm = ({ uniqueCategories }: Props): JSX.Element => {
   return (
       <form action={createTransaction}>
           <Label htmlFor='name'>
@@ -41,12 +43,12 @@ const NewTransactionForm = (props: Props): JSX.Element => {
                       <SelectValue placeholder='Category'/>
                   </SelectTrigger>
                   <SelectContent>
-                      <SelectItem value='other'>Other</SelectItem>
-                      {/* {categories.map((category) => (
+
+                       {uniqueCategories.map((category) => (
                           <SelectItem key={category._id} value={category.name}>
                               {category.name.toUpperCase()}
                           </SelectItem>
-                      ))} */}
+                       ))}
                   </SelectContent>
               </Select>
           </Label>

@@ -3,10 +3,13 @@ import { useState } from 'react'
 import { Button } from '../ui/button'
 import NewTransactionForm from './NewTransactionForm'
 import NewCategoryForm from './NewCategoryForm'
+import { type Category } from '@/types/types'
 
-interface Props {}
+interface Props {
+  uniqueCategories: Category[]
+}
 
-const NewTransaction = (props: Props): JSX.Element => {
+const NewTransaction = ({ uniqueCategories }: Props): JSX.Element => {
   const [openTrans, setOpenTrans] = useState(false)
   const [openCat, setOpenCat] = useState(false)
   return (
@@ -19,7 +22,7 @@ const NewTransaction = (props: Props): JSX.Element => {
                shadow-sm shadow-neutral-900'>
               {openTrans ? 'Close' : 'Add new transaction'}
       </Button>
-      {openTrans && <NewTransactionForm/>}
+      {openTrans && <NewTransactionForm uniqueCategories={uniqueCategories}/>}
       </section>
       <section className='bg-slate-900 bg-opacity-10 rounded-lg flex flex-col gap-4'>
           <Button
@@ -29,7 +32,7 @@ const NewTransaction = (props: Props): JSX.Element => {
                shadow-sm shadow-neutral-900'>
               {openCat ? 'Close' : 'Add new category'}
       </Button>
-      {openCat && <NewCategoryForm/>}
+      {openCat && <NewCategoryForm />}
       </section>
     </>
   )

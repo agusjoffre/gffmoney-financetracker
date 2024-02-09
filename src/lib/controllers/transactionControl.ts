@@ -48,3 +48,14 @@ export const createCategory = async (formData: FormData): Promise<Category> => {
     throw new Error(error.message)
   }
 }
+
+export const getAllCategories = async (): Promise<Category[]> => {
+  try {
+    await connection()
+    const categories = await CategorySchema.find({ userID: userId })
+    return JSON.parse(JSON.stringify(categories))
+  } catch (err) {
+    const error = err as Error
+    throw new Error(error.message)
+  }
+}
