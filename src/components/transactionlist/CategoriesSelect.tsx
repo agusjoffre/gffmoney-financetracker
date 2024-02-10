@@ -18,7 +18,7 @@ const CategoriesSelect = ({ uniqueCategories, setCategorySelected }: Props): JSX
       <section className="flex gap-2 max-w-full overflow-x-hidden w-full">
           <Badge onClick={() => { setCategorySelected('all') }} key={'All'} variant='secondary' className='hidden md:block md:text-sm overflow-hidden'>All</Badge>
           {uniqueCategories.map((category) => {
-            return <Badge onClick={() => { setCategorySelected(category.name) }} variant='secondary' className='hidden md:block md:text-sm overflow-hidden' key={category.id}>{category.name}</Badge>
+            return <Badge onClick={() => { setCategorySelected(category.name) }} variant='secondary' className='hidden md:block md:text-sm overflow-hidden' key={category._id}>{category.name}</Badge>
           })}
           <Select name='category' onValueChange={(value) => { setCategorySelected(value) }}>
               <SelectTrigger className='w-full md:hidden'>

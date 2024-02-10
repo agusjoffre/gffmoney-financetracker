@@ -1,6 +1,7 @@
 export type TransactionType = 'income' | 'outcome'
 
 export interface Transaction {
+  _id: Key | null | undefined
   userID?: string
   name: string
   type: TransactionType
@@ -15,6 +16,7 @@ export interface Category {
   name: string
   importance?: number
   transactions: Transaction[] | null
+  createdAt: Date
 }
 
 export interface ProjectionTransaction {
