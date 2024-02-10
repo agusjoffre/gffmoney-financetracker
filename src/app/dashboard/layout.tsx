@@ -5,7 +5,7 @@ export default function DashboardLayout ({
 }): JSX.Element {
   return (
     <div className='flex'>
-      <main className="sm:mx-[10%] h-screen w-full sm:w-full px-8 ">
+      <main className="sm:mx-[10%] h-screen w-screen sm:w-full px-8 ">
         {children}
       </main>
 

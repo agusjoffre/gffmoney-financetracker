@@ -15,19 +15,15 @@ interface Props {
 
 const CategoriesSelect = ({ uniqueCategories, setCategorySelected }: Props): JSX.Element => {
   return (
-      <section className="flex gap-2 max-w-full overflow-x-hidden w-full">
-          <Badge onClick={() => { setCategorySelected('all') }} key={'All'} variant='secondary' className='hidden md:block md:text-sm overflow-hidden'>All</Badge>
-          {uniqueCategories.map((category) => {
-            return <Badge onClick={() => { setCategorySelected(category.name) }} variant='secondary' className='hidden md:block md:text-sm overflow-hidden' key={category._id}>{category.name}</Badge>
-          })}
+      <section className="w-fit">
           <Select name='category' onValueChange={(value) => { setCategorySelected(value) }}>
-              <SelectTrigger className='w-full md:hidden'>
-                  <SelectValue placeholder='Filter by categories' />
+              <SelectTrigger className='border-none bg-[var(--dark-pink)] rounded-lg md:rounded-xl text-white hover:bg-[var(--dark-pink)]'>
+                  <SelectValue placeholder='Category' />
               </SelectTrigger>
-              <SelectContent>
-                  <SelectItem value='all'>All</SelectItem>
+              <SelectContent className='bg-[var(--dark-pink)] rounded-lg md:rounded-xl text-white border-none hover:bg-[var(--dark-pink)] max-w-44'>
+                  <SelectItem className='cursor-pointer hover:text-base' value='all'>All</SelectItem>
                   {uniqueCategories.map((category) => (
-                      <SelectItem key={category._id} value={category.name}>
+                      <SelectItem className='cursor-pointer hover:text-base' key={category._id} value={category.name}>
                           {category.name}
                       </SelectItem>
                   ))}
