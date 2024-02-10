@@ -104,3 +104,14 @@ export const getIncomeAndOutcomeTransactions = async (): Promise<{ incomeTransac
     throw new Error(error.message)
   }
 }
+
+export const getOneCateogoryByName = async (category: string): Promise<Category> => {
+  try {
+    await connection()
+    const categoryFiltered = await CategorySchema.findOne({ userID: userId, name: category }).populate('transactions')
+    return JSON.parse(JSON.stringify(categoryFiltered))
+  } catch (err) {
+    const error = err as Error
+    throw new Error(error.message)
+  }
+}

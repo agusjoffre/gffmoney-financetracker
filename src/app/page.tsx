@@ -10,7 +10,7 @@ export default function Home (): JSX.Element {
       </p>
     <Link href='/dashboard'>
         <Button
-        className='w-full md:w-80 md:py-5 md:rounded-lg bg-blue-400 text-white text-md font-semibold rounded-lg md:font-bold md:text-xl'>
+        className='w-full md:w-80 md:py-5 hover:bg-slate-800 hover:text-white bg-slate-900 shadow-md shadow-slate-800 text-white text-md font-semibold rounded-full md:font-semibold md:text-xl'>
         Start now!
         </Button>
       </Link>

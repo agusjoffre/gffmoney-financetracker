@@ -14,11 +14,11 @@ const NewTransaction = ({ uniqueCategories }: Props): JSX.Element => {
   const [openCat, setOpenCat] = useState(false)
   return (
     <>
-      <section className='bg-slate-900 bg-opacity-10 rounded-lg flex flex-col gap-4'>
+      <section className='bg-transparent bg-opacity-80 flex flex-col gap-4'>
           <Button
               onClick={() => { setOpenTrans(!openTrans) }}
-              className='text-md font-semibold text-white
-               w-full rounded-lg bg-transparent
+              className='text-md font-semibold text-slate-900
+               w-full rounded-xl bg-slate-300
                shadow-sm shadow-neutral-900'>
               {openTrans ? 'Close' : 'Add new transaction'}
       </Button>
@@ -27,8 +27,8 @@ const NewTransaction = ({ uniqueCategories }: Props): JSX.Element => {
       <section className='bg-slate-900 bg-opacity-10 rounded-lg flex flex-col gap-4'>
           <Button
               onClick={() => { setOpenCat(!openCat) }}
-              className='text-md font-semibold text-white
-               w-full rounded-lg bg-transparent
+              className='text-md font-semibold text-slate-900
+               w-full rounded-xl bg-slate-300
                shadow-sm shadow-neutral-900'>
               {openCat ? 'Close' : 'Add new category'}
       </Button>

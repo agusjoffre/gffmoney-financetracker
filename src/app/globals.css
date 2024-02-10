@@ -73,17 +73,17 @@
     @apply border-border;
   }
   body {
-    @apply text-foreground;
+    @apply text-foreground bg-slate-900;
   }
 }
 
 
 body {
-  background-image: url('../assets/gradient-wallpaper-0025.png');
+  /* background-image: url('../assets/gradient-wallpaper-0025.png');
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  background-size: cover;
+  background-size: cover; */
   height: 100vh;
   box-sizing: border-box;
   padding: 0;
