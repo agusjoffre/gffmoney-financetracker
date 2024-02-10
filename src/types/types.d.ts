@@ -20,17 +20,17 @@ export interface Category {
 }
 
 export interface ProjectionTransaction {
-  userID?: string
+  userID: string
   name: string
   type: TransactionType
   amount: number
 }
 
 export interface Projection {
-  userID?: string
-  income: number
-  outcome: number
-  transactions: ProjectionTransaction[]
+  userID: string
+  income?: number
+  outcome?: number
+  transactions?: ProjectionTransaction[]
 }
 
 export interface User {
