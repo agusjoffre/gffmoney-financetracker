@@ -39,7 +39,7 @@ export const initializeUser = async (): Promise<User> => {
   }
 }
 
-const getMoney = async (): Promise<{ incomeAmount: number, outcomeAmount: number, balance: number }> => {
+export const getMoney = async (): Promise<{ incomeAmount: number, outcomeAmount: number, balance: number }> => {
   const { incomeTransactions, outcomeTransactions } = await getIncomeAndOutcomeTransactions()
   const incomeAmount = incomeTransactions.map((transaction: Transaction): number => {
     return transaction.amount
