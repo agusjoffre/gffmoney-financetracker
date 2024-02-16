@@ -15,15 +15,15 @@ interface Props {
 
 const CategoriesSelect = ({ uniqueCategories, setCategorySelected }: Props): JSX.Element => {
   return (
-      <section className="w-fit">
+    <section className="w-fit flex items-center">
           <Select name='category' onValueChange={(value) => { setCategorySelected(value) }}>
-              <SelectTrigger className='border-none bg-[var(--dark-pink)] rounded-lg md:rounded-xl text-white hover:bg-[var(--dark-pink)]'>
+              <SelectTrigger className='w-full border-none bg-[var(--dark-pink)] rounded-lg md:rounded-xl text-white hover:bg-[var(--dark-pink)]'>
                   <SelectValue placeholder='Category' />
               </SelectTrigger>
-              <SelectContent className='bg-[var(--dark-pink)] rounded-lg md:rounded-xl text-white border-none hover:bg-[var(--dark-pink)] max-w-44'>
-                  <SelectItem className='cursor-pointer hover:text-base' value='all'>All</SelectItem>
+              <SelectContent className=' w-full bg-[var(--dark-pink)] rounded-lg md:rounded-xl text-white border-none hover:bg-[var(--dark-pink)] max-w-44'>
+                  <SelectItem className='w-full cursor-pointer hover:text-base' value='all'>All</SelectItem>
                   {uniqueCategories.map((category) => (
-                      <SelectItem className='cursor-pointer hover:text-base' key={category._id} value={category.name}>
+                      <SelectItem className='w-full cursor-pointer hover:text-base' key={category._id} value={category.name}>
                           {category.name}
                       </SelectItem>
                   ))}

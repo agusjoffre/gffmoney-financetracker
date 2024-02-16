@@ -1,5 +1,5 @@
 import { type Transaction, type Category } from '@/types/types'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { TableCell, TableRow } from '@/components/ui/table'
 
 interface Props {
   filteredCategory: Category | undefined | null
@@ -42,31 +42,14 @@ const TransactionCard = ({ filteredCategory, transaction }: Props): JSX.Element 
   }
 
   return (
- <article className="border-none shadow-lg shadow-[var(--sky)] md:shadow-2xl rounded-xl md:rounded-2xl p-6 flex flex-col md:flex-row gap-4 md:items-center md:justify-around" style={cardStyleByType} >
-          <div className="flex flex-col md:flex-row w-fit gap-8">
-              <p className="text-sm font-medium text-[var(--light-dark)]">{transaction?.type.toUpperCase()}</p>
-              <p className="text-base font-semibold whitespace-nowrap truncate">{transaction?.name}</p>
-      </div>
-      <div className="flex justify-center items-center p-0">
-        <p className="text-xl font-bold text-center">
-        {transaction?.type === 'income' ? '+' : '-'}
-        {' '}
-        $ {transaction?.amount}
-      </p>
-      </div>
-      {(filteredCategory != null)
-        ? <span className="whitespace-nowrap truncate">{filteredCategory?.name}</span>
-        : <span className="whitespace-nowrap truncate">{transaction?.categoryName}</span>
-      }
+    <TableRow className=' rounded-xl' style={cardStyleByType}>
+        <TableCell className='text-center'>{transaction?.type.toUpperCase()}</TableCell>
+        <TableCell className='text-center'>{transaction?.name}</TableCell>
+        <TableCell className='text-center'>{transaction?.type === 'income' ? '+' : '-'} ${transaction?.amount}</TableCell>
+        <TableCell className='text-center'>{(filteredCategory != null) ? filteredCategory?.name : transaction?.categoryName}</TableCell>
+        <TableCell className='text-center'>{date}</TableCell>
+    </TableRow>
 
-      <span className="">{date}</span>
-      {(filteredCategory != null) &&
-      <span>
-        { filteredCategory?.importance === 0 ? '🟢' : filteredCategory?.importance === 1 ? '🟡' : '🔴'}
-        </span>
-      }
-
-    </article>
   )
 }
 

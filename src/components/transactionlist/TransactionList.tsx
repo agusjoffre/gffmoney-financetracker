@@ -11,7 +11,17 @@ import {
   CardHeader,
   CardTitle
 } from '@/components/ui/card'
-
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow
+} from '@/components/ui/table'
+import { Input } from '../ui/input'
+import { Label } from '../ui/label'
 interface Props {
   uniqueCategories: Category[]
 }
@@ -43,26 +53,37 @@ const TransactionList = ({ uniqueCategories }: Props): JSX.Element => {
   }, [categorySelected])
 
   return (
-    <Card className='border-none shadow-xl min-w-full max-w-full w-full flex flex-col rounded-lg md:rounded-xl bg-[var(--pink)]'>
-      <CardHeader className='flex md:flex-row justify-between items-center'>
-        <CardTitle className='text-[var(--dark)] md:font-bold md:text-2xl'>
-          Your transactions
-        </CardTitle>
-        <CardDescription className='flex md:flex-row gap-2 items-center'>
-          <p className='text-[var(--dark)] md:font-medium md:text-sm'>Filter by</p>
-          <CategoriesSelect uniqueCategories={uniqueCategories} setCategorySelected={setCategorySelected} />
-        </CardDescription>
-      </CardHeader>
-      <CardContent className='flex flex-col gap-4 w-full border-none'>
-        {isAll
-          ? allTransactions?.map((trans: Transaction) => (
-            <TransactionCard key={trans._id} filteredCategory={filteredCategory} transaction={trans} />
-          ))
-          : filteredCategory?.transactions?.map((trans: Transaction) => (
-            <TransactionCard key={trans._id} filteredCategory={filteredCategory} transaction={trans} />
-          ))}
-      </CardContent>
-    </Card>
+    <div className='w-full h-full bg-[var(--pink)] p-5 rounded-xl mb-11'>
+      <div className='py-4'>
+        <h1 className='text-[var(--dark)] text-xl font-bold'>Your transactions</h1>
+      </div>
+      <div className='w-full flex md:flex-row flex-col md:items-center md:gap-24 pb-5'>
+        <Input className='w-full bg-[var(--dark)] text-[var(--pink)]' type='text' placeholder='Search by name' />
+        <CategoriesSelect setCategorySelected={setCategorySelected} uniqueCategories={uniqueCategories} />
+      </div>
+
+      <Table className='w-full bg-[var(--dark-pink)] rounded-xl shadow-xl text-[var(--dark)] hover:bg-[var(--dark-pink)]'>
+  <TableCaption className='text-[var(--dark)]'>A list of your transactions.</TableCaption>
+        <TableHeader>
+    <TableRow className='rounded-xl hover:bg-transparent'>
+      <TableHead className="text-center text-white">Type</TableHead>
+      <TableHead className="text-center text-white">Name</TableHead>
+      <TableHead className="text-center text-white">Amount</TableHead>
+      <TableHead className="text-center text-white">Category</TableHead>
+      <TableHead className="text-center text-white">Date</TableHead>
+    </TableRow>
+  </TableHeader>
+        <TableBody>
+    {isAll
+      ? allTransactions?.map((trans: Transaction) => (
+        <TransactionCard key={trans._id} filteredCategory={filteredCategory} transaction={trans} />
+      ))
+      : filteredCategory?.transactions?.map((trans: Transaction) => (
+        <TransactionCard key={trans._id} filteredCategory={filteredCategory} transaction={trans} />
+      ))}
+  </TableBody>
+      </Table>
+  </div>
 
   )
 }
