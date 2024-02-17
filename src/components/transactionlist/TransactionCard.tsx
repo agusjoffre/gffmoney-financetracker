@@ -27,13 +27,13 @@ const TransactionCard = ({ filteredCategory, transaction }: Props): JSX.Element 
         color = 'white'
         break
       default:
-        backgroundColor = 'var(--dark)'
+        backgroundColor = 'var(--dark-pink)'
         color = 'var(--sky)'
         break
     }
   } else {
-    backgroundColor = 'var(--dark)'
-    color = 'var(--sky)'
+    backgroundColor = 'var(--dark-pink)'
+    color = 'white'
   }
 
   const cardStyleByType = {
@@ -42,7 +42,7 @@ const TransactionCard = ({ filteredCategory, transaction }: Props): JSX.Element 
   }
 
   return (
-    <TableRow className=' rounded-xl' style={cardStyleByType}>
+    <TableRow className=' rounded-xl font-medium text-xs' style={cardStyleByType}>
         <TableCell className='text-center'>{transaction?.type.toUpperCase()}</TableCell>
         <TableCell className='text-center'>{transaction?.name}</TableCell>
         <TableCell className='text-center'>{transaction?.type === 'income' ? '+' : '-'} ${transaction?.amount}</TableCell>

@@ -4,18 +4,17 @@ import { type Transaction, type User } from '@/types/types'
 import { auth, currentUser } from '@clerk/nextjs'
 import { revalidatePath } from 'next/cache'
 import { getIncomeAndOutcomeTransactions } from '@/lib/controllers/transactionControl'
+import { redirect } from 'next/navigation'
 
 const { userId } = auth()
 
 export const initializeUser = async (): Promise<User> => {
-  const user = await currentUser()
-
   try {
     await connection()
+    const user = await currentUser()
     const existingUser = await UserSchema.findOne({ userID: userId })
     // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
-    // create user if not existing
-    if (!(existingUser)) {
+    if (!existingUser) {
       const newUser = await new UserSchema({
         userID: userId,
         income: 0,
@@ -25,8 +24,9 @@ export const initializeUser = async (): Promise<User> => {
         categories: [],
         friends: [],
         projections: [],
-        username: user?.username
+        username: ((user?.username) !== null) ? user?.username : `${user?.firstName} {user?.lastName}`
       }).save() as User
+
       revalidatePath('/dashboard')
       return JSON.parse(JSON.stringify(newUser))
     } else {
@@ -41,6 +41,9 @@ export const initializeUser = async (): Promise<User> => {
 
 export const getMoney = async (): Promise<{ incomeAmount: number, outcomeAmount: number, balance: number }> => {
   const { incomeTransactions, outcomeTransactions } = await getIncomeAndOutcomeTransactions()
+  if (incomeTransactions.length === 0 && outcomeTransactions.length === 0) {
+    return { incomeAmount: 0, outcomeAmount: 0, balance: 0 }
+  }
   const incomeAmount = incomeTransactions.map((transaction: Transaction): number => {
     return transaction.amount
   }).reduce((a: number, b: number): number => {
