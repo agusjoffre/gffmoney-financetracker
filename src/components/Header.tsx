@@ -1,7 +1,6 @@
-import { SignInButton, SignOutButton, SignUp, SignUpButton, UserButton, auth, currentUser } from '@clerk/nextjs'
+import { UserButton, auth, currentUser } from '@clerk/nextjs'
 import Image from 'next/image'
 import Link from 'next/link'
-import { Button } from './ui/button'
 
 const Header = async (): Promise<JSX.Element> => {
   const user = await currentUser()
@@ -26,8 +25,8 @@ const Header = async (): Promise<JSX.Element> => {
               <Link className='hover:text-[var(--dark-pink)]' href={'/outcome'}>Outcome</Link>
               </nav>
           </div>
-          {(userId != null) && (user != null)
-            ? (
+          {(userId != null) && (user != null) &&
+             (
             <div className='flex gap-4 items-center'>
               <UserButton afterSignOutUrl='/' />
               <div className='flex flex-col'>
@@ -35,21 +34,7 @@ const Header = async (): Promise<JSX.Element> => {
                   <p className='text-[var(--dark-pink)] font-semibold text-xs opacity-0'>Admin</p>
               </div>
           </div>
-              )
-            : (
-          <div className='flex gap-4 items-center'>
-          <SignInButton afterSignInUrl='/dashboard' mode='modal'>
-            <Button className='w-full bg-[var(--sky)] text-[var(--dark)] rounded-2xl px-8 hover:bg-[var(--dark)] hover:text-[var(--sky)] hover:border-[1px] border-[var(--sky)]'>
-              Login
-            </Button>
-            </SignInButton>
-            <SignUpButton afterSignUpUrl='/dashboard' mode='modal'>
-              <Button className='w-full bg-[var(--pink)] text-[var(--dark)] rounded-2xl px-8 hover:bg-[var(--dark)] hover:text-[var(--pink)] hover:border-[1px] border-[var(--pink)]'>
-                Sign Up
-              </Button>
-            </SignUpButton>
-          </div>
-              )}
+             )}
 
     </header>
   )

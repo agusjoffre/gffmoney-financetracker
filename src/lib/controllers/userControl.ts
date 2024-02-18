@@ -4,7 +4,6 @@ import { type Transaction, type User } from '@/types/types'
 import { auth, currentUser } from '@clerk/nextjs'
 import { revalidatePath } from 'next/cache'
 import { getIncomeAndOutcomeTransactions } from '@/lib/controllers/transactionControl'
-import { redirect } from 'next/navigation'
 
 const { userId } = auth()
 
@@ -24,7 +23,7 @@ export const initializeUser = async (): Promise<User> => {
         categories: [],
         friends: [],
         projections: [],
-        username: ((user?.username) !== null) ? user?.username : `${user?.firstName} {user?.lastName}`
+        username: ((user?.username) !== null) ? user?.username : `${user?.firstName} ${user?.lastName}`
       }).save() as User
 
       revalidatePath('/dashboard')

@@ -2,15 +2,9 @@
 import { type Transaction, type Category, type TransactionType } from '@/types/types'
 import CategoriesSelect from './CategoriesSelect'
 import TransactionCard from './TransactionCard'
-import { getOneCateogoryByName, getAllCategories, getIncomeAndOutcomeTransactions } from '@/lib/controllers/transactionControl'
+import { getOneCateogoryByName, getAllCategories } from '@/lib/controllers/transactionControl'
 import { useEffect, useState } from 'react'
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle
-} from '@/components/ui/card'
+
 import {
   Table,
   TableBody,
