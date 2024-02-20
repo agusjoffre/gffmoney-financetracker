@@ -3,11 +3,7 @@ import { createCategory } from '@/lib/controllers/transactionControl'
 import { Input } from '../ui/input'
 import { Label } from '../ui/label'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select'
-import { Button } from '../ui/button'
-
-interface Props {
-
-}
+import ButtonSubmit from '../ButtonSubmit'
 
 const NewCategoryForm = (): JSX.Element => {
   return (
@@ -29,7 +25,7 @@ const NewCategoryForm = (): JSX.Element => {
           </SelectContent>
         </Select>
       </Label>
-      <Button type='submit' variant={'outline'} className='w-full rounded-xl text-[var(--dark)]'>Create new category</Button>
+      <ButtonSubmit text='Create new category' type='category' />
     </form>
   )
 }

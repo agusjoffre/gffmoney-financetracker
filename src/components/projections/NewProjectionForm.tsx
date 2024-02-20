@@ -1,3 +1,4 @@
+import ButtonSubmit from '../ButtonSubmit'
 import { Button } from '../ui/button'
 import { Input } from '../ui/input'
 import { Label } from '../ui/label'
@@ -10,9 +11,7 @@ import {
 } from '../ui/select'
 import { createProjectionTransaction } from '@/lib/controllers/projectionsControl'
 
-interface Props { }
-
-const NewProjectionForm = (props: Props): JSX.Element => {
+const NewProjectionForm = (): JSX.Element => {
   return (
       // eslint-disable-next-line @typescript-eslint/no-misused-promises
       <form action={createProjectionTransaction}>
@@ -22,7 +21,7 @@ const NewProjectionForm = (props: Props): JSX.Element => {
           </Label>
           <Label htmlFor='amount'>
               <span>Amount</span>
-              <Input required={true} name='amount' id='amount' type='number' placeholder='e.g 400'/>
+              <Input required={true} name='amount' id='amount' type='number' min={0} step={0.01} placeholder='e.g 400'/>
       </Label>
       <Label>
         <span>Transaction type</span>
@@ -36,7 +35,7 @@ const NewProjectionForm = (props: Props): JSX.Element => {
             </SelectContent>
           </Select>
       </Label>
-      <Button type='submit' className='w-full'>Create</Button>
+      <ButtonSubmit text='Create new projection' type='projection' />
     </form>
   )
 }

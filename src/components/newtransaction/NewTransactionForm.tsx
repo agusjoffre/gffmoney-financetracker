@@ -7,6 +7,7 @@ import { Button } from '../ui/button'
 import { types } from '@/lib/constants'
 import { createTransaction } from '@/lib/controllers/transactionControl'
 import { type Category } from '@/types/types'
+import ButtonSubmit from '../ButtonSubmit'
 interface Props {
   uniqueCategories: Category[]
 }
@@ -19,7 +20,7 @@ const NewTransactionForm = ({ uniqueCategories }: Props): JSX.Element => {
           </Label>
           <Label htmlFor='amount' className='flex flex-col gap-2'>
               <span>Amount</span>
-                  <Input className='rounded-xl bg-[var(--dark)] text-[var(--sky)]' required={true} id='amount' name='amount' type='number' placeholder='e.g 400'/>
+                  <Input className='rounded-xl bg-[var(--dark)] text-[var(--sky)]' required={true} id='amount' name='amount' type='number' min={0} step={0.01} placeholder='e.g 400'/>
           </Label>
           <Label htmlFor='type' className='flex flex-col gap-2'>
               <span>Transaction type</span>
@@ -52,7 +53,7 @@ const NewTransactionForm = ({ uniqueCategories }: Props): JSX.Element => {
                   </SelectContent>
               </Select>
           </Label>
-          <Button variant={'outline'} className='w-full rounded-xl text-[var(--dark)]' type='submit'>Create new transaction</Button>
+          <ButtonSubmit text='Create new transaction' type='transaction'/>
     </form>
   )
 }

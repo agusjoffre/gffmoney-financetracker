@@ -4,7 +4,6 @@ import CategoriesSelect from './CategoriesSelect'
 import TransactionCard from './TransactionCard'
 import { getOneCateogoryByName, getAllCategories } from '@/lib/controllers/transactionControl'
 import { useEffect, useState } from 'react'
-
 import {
   Table,
   TableBody,
