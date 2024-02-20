@@ -12,7 +12,7 @@ export const initializeProjection = async (): Promise<Projection> => {
   try {
     await connection()
     const existingProjection = await ProjectionSchema.findOne({ userID: userId })
-    console.log('existingProjection', existingProjection)
+
     // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
     if (!(existingProjection)) {
       const projection = {

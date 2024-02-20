@@ -12,6 +12,7 @@ import {
   TableHeader,
   TableRow
 } from '@/components/ui/table'
+
 import { Input } from '../ui/input'
 import TypeSelect from './TypeSelect'
 
@@ -68,7 +69,7 @@ const TransactionList = ({ uniqueCategories }: Props): JSX.Element => {
       <TableHead className="text-center font-light text-white text-xs">Date</TableHead>
     </TableRow>
   </TableHeader>
-        <TableBody>
+        <TableBody >
     {isAll
       ? allTransactions?.map((trans: Transaction) => (
         <TransactionCard key={trans._id} filteredCategory={filteredCategory} transaction={trans} />
