@@ -11,25 +11,25 @@ interface Props {
 
 const NewCategoryForm = (): JSX.Element => {
   return (
-    <form action={createCategory}>
-      <Label htmlFor='name'>
+    <form action={createCategory} className='w-full flex flex-col gap-6'>
+      <Label htmlFor='name' className='flex flex-col gap-2'>
         <span>Category name</span>
-        <Input required={true} id='name' name='name' type='text' placeholder='e.g Work'/>
+        <Input className='rounded-xl bg-[var(--dark)] text-[var(--sky)]' required={true} id='name' name='name' type='text' placeholder='e.g Work'/>
       </Label>
-      <Label htmlFor='importance'>
+      <Label htmlFor='importance' className='flex flex-col gap-2'>
         <span>Importance</span>
         <Select name='importance'>
-          <SelectTrigger>
+          <SelectTrigger className='rounded-xl bg-[var(--dark)] text-[var(--sky)]'>
             <SelectValue placeholder='Importance'/>
           </SelectTrigger>
-          <SelectContent>
-            <SelectItem value='0'>Low</SelectItem>
-            <SelectItem value='1'>Medium</SelectItem>
-            <SelectItem value='2'>High</SelectItem>
+          <SelectContent className='rounded-xl bg-[var(--dark)] text-[var(--sky)] '>
+            <SelectItem className='cursor-pointer hover:text-base' value='0'>Low</SelectItem>
+            <SelectItem className='cursor-pointer hover:text-base' value='1'>Medium</SelectItem>
+            <SelectItem className='cursor-pointer hover:text-base' value='2'>High</SelectItem>
           </SelectContent>
         </Select>
       </Label>
-      <Button type='submit' className='w-full'>Create</Button>
+      <Button type='submit' variant={'outline'} className='w-full rounded-xl text-[var(--dark)]'>Create new category</Button>
     </form>
   )
 }

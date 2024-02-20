@@ -5,10 +5,11 @@ import { initializeUser, getMoney } from '@/lib/controllers/userControl'
 import { Info } from 'lucide-react'
 import { type Category } from '@/types/types'
 import SelectCurrency from '@/components/dashboard/SelectCurrency'
-import NewTransactionsAndCategories from '@/components/dashboard/NewTrsButtons'
 import ProjectionList from '@/components/projections/ProjectionList'
 import NewProjection from '@/components/projections/NewProjection'
 import { getAllTransactionsProjection, getProjectionMoney } from '@/lib/controllers/projectionsControl'
+import NewTransaction from '@/components/newtransaction/NewTransaction'
+import NewCategory from '@/components/newtransaction/NewCategory'
 
 const DashboardPage = async (): Promise<JSX.Element> => {
   const allCategories: Category[] = await getAllCategories()
@@ -40,7 +41,11 @@ const DashboardPage = async (): Promise<JSX.Element> => {
       </section>
       <section className='flex md:flex-row w-full gap-8'>
         <section className='w-full flex flex-col gap-8 md:gap-10'>
-          <NewTransactionsAndCategories />
+          <article className='flex md:flex-row w-full gap-8'>
+            <NewTransaction uniqueCategories={uniqueCategories} />
+            <NewCategory/>
+          </article>
+
           <TransactionList uniqueCategories={uniqueCategories}/>
         </section>
         <section className='flex flex-col gap-8 md:gap-10 w-full'>

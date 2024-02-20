@@ -45,7 +45,7 @@ const TransactionList = ({ uniqueCategories }: Props): JSX.Element => {
     }
 
     get().catch(console.error)
-  }, [categorySelected])
+  }, [categorySelected, uniqueCategories])
 
   return (
     <div className='w-full h-full bg-[var(--pink)] p-5 rounded-xl mb-11'>

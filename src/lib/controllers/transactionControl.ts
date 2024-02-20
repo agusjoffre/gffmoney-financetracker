@@ -5,7 +5,7 @@ import TransactionSchema from '@/db/models/TransactionSchema'
 import UserSchema from '@/db/models/UserSchema'
 import { auth } from '@clerk/nextjs'
 import { connection } from '@/db/dbConnect'
-import { revalidatePath } from 'next/cache'
+import { revalidatePath, revalidateTag } from 'next/cache'
 import { updateUserMoney } from './userControl'
 
 const { userId } = auth()
@@ -82,6 +82,7 @@ export const createCategory = async (formData: FormData): Promise<Category> => {
     await updateUserMoney()
 
     revalidatePath('/dashboard')
+    revalidateTag('categories')
 
     return JSON.parse(JSON.stringify(newCategory))
   } catch (err) {

@@ -43,6 +43,30 @@ export const getMoney = async (): Promise<{ incomeAmount: number, outcomeAmount:
   if (incomeTransactions.length === 0 && outcomeTransactions.length === 0) {
     return { incomeAmount: 0, outcomeAmount: 0, balance: 0 }
   }
+
+  if (incomeTransactions.length === 0) {
+    return {
+      incomeAmount: 0,
+      outcomeAmount: outcomeTransactions.map((transaction: Transaction): number => {
+        return transaction.amount
+      }).reduce((a: number, b: number): number => {
+        return a + b
+      }),
+      balance: 0
+    }
+  }
+  if (outcomeTransactions.length === 0) {
+    return {
+      incomeAmount: incomeTransactions.map((transaction: Transaction): number => {
+        return transaction.amount
+      }).reduce((a: number, b: number): number => {
+        return a + b
+      }),
+      outcomeAmount: 0,
+      balance: 0
+    }
+  }
+
   const incomeAmount = incomeTransactions.map((transaction: Transaction): number => {
     return transaction.amount
   }).reduce((a: number, b: number): number => {
