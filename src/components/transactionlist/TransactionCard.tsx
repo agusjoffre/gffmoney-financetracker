@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
+'use client'
 import { type Transaction, type Category } from '@/types/types'
 import { TableCell, TableRow } from '@/components/ui/table'
 import {
@@ -6,6 +8,7 @@ import {
   PopoverTrigger
 } from '@/components/ui/popover'
 import { Button } from '../ui/button'
+import { deleteTransaction } from '@/lib/controllers/transactionControl'
 
 interface Props {
   filteredCategory: Category | undefined | null
@@ -13,6 +16,7 @@ interface Props {
 }
 
 const TransactionCard = ({ filteredCategory, transaction }: Props): JSX.Element => {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
   const date = new Date(transaction?.createdAt).toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' })
 
   let backgroundColor
@@ -69,7 +73,10 @@ const TransactionCard = ({ filteredCategory, transaction }: Props): JSX.Element 
           </Button>
           <Button className='bg-[var(--pink)] text-[var(--dark)]
            md:rounded-xl text-base font-medium
-            hover:bg-pink-100 w-full'>
+            hover:bg-pink-100 w-full'
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+          onClick={async () => { await deleteTransaction(transaction._id) }}
+          >
             Delete
           </Button>
         </div>

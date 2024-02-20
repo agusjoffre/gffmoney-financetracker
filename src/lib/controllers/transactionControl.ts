@@ -116,3 +116,25 @@ export const getOneCateogoryByName = async (category: string): Promise<Category>
     throw new Error(error.message)
   }
 }
+
+export const deleteTransaction = async (id_: string): Promise<void> => {
+  try {
+    await connection()
+    await TransactionSchema.findByIdAndDelete(id_)
+    revalidatePath('/dashboard')
+  } catch (err) {
+    const error = err as Error
+    throw new Error(error.message)
+  }
+}
+
+export const deleteCategory = async (id_: string): Promise<void> => {
+  try {
+    await connection()
+    await CategorySchema.findByIdAndDelete(id_)
+    revalidatePath('/dashboard')
+  } catch (err) {
+    const error = err as Error
+    throw new Error(error.message)
+  }
+}
