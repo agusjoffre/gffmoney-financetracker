@@ -47,7 +47,7 @@ const TransactionList = ({ uniqueCategories }: Props): JSX.Element => {
   }, [categorySelected, uniqueCategories])
 
   return (
-    <div className='w-full h-full bg-[var(--pink)] p-5 rounded-xl mb-11'>
+    <div className='w-full h-2/5 overflow-scroll bg-[var(--pink)] p-5 rounded-xl mb-11'>
       <div className='py-4'>
         <h1 className='text-[var(--dark)] text-xl font-bold'>Your transactions</h1>
       </div>
@@ -57,10 +57,10 @@ const TransactionList = ({ uniqueCategories }: Props): JSX.Element => {
         <TypeSelect setTypeSelected={setTypeSelected} />
       </div>
 
-      <Table className='w-full bg-[var(--dark-pink)] rounded-xl shadow-xl text-[var(--dark)] hover:bg-[var(--dark-pink)]'>
+      <Table className='overflow-scroll h-full w-full bg-[var(--dark-pink)] rounded-xl shadow-xl text-[var(--dark)] hover:bg-[var(--dark-pink)]'>
   <TableCaption className='text-[var(--dark)]'>A list of your transactions.</TableCaption>
         <TableHeader>
-    <TableRow className='rounded-xl hover:bg-transparent font-light'>
+    <TableRow className='overflow-scroll rounded-xl hover:bg-transparent font-light'>
       <TableHead className="text-center font-light text-white text-xs">Type</TableHead>
       <TableHead className="text-center font-light text-white text-xs">Name</TableHead>
       <TableHead className="text-center font-light text-white text-xs">Amount</TableHead>

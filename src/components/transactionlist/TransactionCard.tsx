@@ -42,7 +42,7 @@ const TransactionCard = ({ filteredCategory, transaction }: Props): JSX.Element 
   }
 
   return (
-    <TableRow className=' rounded-xl font-medium text-xs' style={cardStyleByType}>
+    <TableRow className='h-full rounded-xl font-medium text-xs' style={cardStyleByType}>
         <TableCell className='text-center'>{transaction?.type.toUpperCase()}</TableCell>
         <TableCell className='text-center'>{transaction?.name}</TableCell>
         <TableCell className='text-center'>{transaction?.type === 'income' ? '+' : '-'} {transaction?.amount.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</TableCell>

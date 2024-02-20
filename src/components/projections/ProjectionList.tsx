@@ -23,7 +23,7 @@ interface Props {
 const ProjectionList = ({ allTransactions, projectionMoney }: Props): JSX.Element => {
   const { income, outcome, balance } = projectionMoney
   return (
-        <div className='w-full h-full bg-[var(--sky)] p-5 rounded-xl mb-11 flex flex-col gap-8'>
+        <div className='w-full h-2/5 overflow-scroll bg-[var(--sky)] p-5 rounded-xl mb-11 flex flex-col gap-8'>
             <div className='py-4 flex md:flex-row md:justify-between md:items-center'>
               <h1 className='text-[var(--dark)] text-xl font-bold'>Your projections</h1>
               {/* you wil lose inflation & this month estimated inflation */}

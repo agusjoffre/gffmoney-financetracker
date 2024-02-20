@@ -20,7 +20,7 @@ interface Props {
 const NewTransaction = ({ uniqueCategories }: Props): JSX.Element => {
   return (
     <article className='flex md:flex-row'>
-      <Drawer>
+      <Drawer >
         <DrawerTrigger >
           <Button className='bg-[var(--pink)] text-[var(--dark)] md:rounded-xl text-base font-medium hover:bg-pink-100'>Add new transaction</Button>
         </DrawerTrigger>
