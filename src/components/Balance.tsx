@@ -37,15 +37,15 @@ const BalanceCard = ({ amount, type }: Props): JSX.Element => {
   }
 
   return (
-    <Card className='w-full rounded-2xl border-none shadow-lg md:shadow-2xl' style={cardStyleByType}>
+    <Card className='w-full h-full rounded-2xl border-none shadow-lg md:shadow-2xl' style={cardStyleByType}>
         <CardHeader className='flex justify-between flex-row items-center'>
             <CardTitle>{type === 'balance' ? 'Balance' : type === 'income' ? 'Income' : 'Outcome'}</CardTitle>
-              <CardDescription className='sm:text-6xl text-2xl' style={cardStyleByType}>
+              <CardDescription className=' text-2xl' style={cardStyleByType}>
                   {type === 'balance' ? <BarChart3Icon/> : type === 'income' ? <ArrowUpRightSquareIcon/> : <ArrowDownRightSquareIcon/>}
               </CardDescription>
         </CardHeader>
         <CardContent>
-            <p className='sm:text-6xl sm:font-semibold text-right text-3xl'>{type === 'income' ? '+ ' : type === 'outcome' ? '- ' : null}{amnt}</p>
+            <p className=' sm:font-semibold text-right text-3xl'>{type === 'income' ? '+ ' : type === 'outcome' ? '- ' : null}{amnt}</p>
         </CardContent>
     </Card>
 

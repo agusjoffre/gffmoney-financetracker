@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/strict-boolean-expressions */
 'use server'
 import ProjectionSchema from '@/db/models/ProjectionSchema'
 import { connection } from '@/db/dbConnect'
@@ -46,6 +47,35 @@ export const createProjectionTransaction = async (formData: FormData): Promise<P
     await ProjectionSchema.findOneAndUpdate({ userID: userId }, { $push: { transactions: newTransaction._id } })
 
     return JSON.parse(JSON.stringify(newTransaction))
+  } catch (err) {
+    const error = err as Error
+    throw new Error(error.message)
+  }
+}
+
+export const getAllTransactionsProjection = async (): Promise<ProjectionTransaction[]> => {
+  try {
+    await connection()
+    const allTransactionsProjections = await ProjectionTransactionSchema.find({ userID: userId })
+    return JSON.parse(JSON.stringify(allTransactionsProjections))
+  } catch (err) {
+    const error = err as Error
+    throw new Error(error.message)
+  }
+}
+
+export const getProjectionMoney = async (): Promise<{ income: number, outcome: number, balance: number }> => {
+  try {
+    await connection()
+    if (!(await ProjectionSchema.findOne({ userID: userId }))) {
+      return { income: 0, outcome: 0, balance: 0 }
+    }
+    const { income, outcome } = await ProjectionSchema.findOne({ userID: userId })
+    if (!(income) && !(outcome)) {
+      return { income: 0, outcome: 0, balance: 0 }
+    }
+    const balance = income - outcome
+    return JSON.parse(JSON.stringify({ income, outcome, balance }))
   } catch (err) {
     const error = err as Error
     throw new Error(error.message)

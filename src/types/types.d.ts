@@ -20,6 +20,7 @@ export interface Category {
 }
 
 export interface ProjectionTransaction {
+  _id: Key | null | undefined
   userID: string
   name: string
   type: TransactionType

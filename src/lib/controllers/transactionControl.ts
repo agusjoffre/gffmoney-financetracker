@@ -9,7 +9,6 @@ import { revalidatePath } from 'next/cache'
 import { updateUserMoney } from './userControl'
 
 const { userId } = auth()
-console.log(userId)
 
 export const createTransaction = async (formData: FormData): Promise<Transaction> => {
   try {
