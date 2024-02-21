@@ -1,3 +1,4 @@
+'use server'
 import { connection } from '@/db/dbConnect'
 import UserSchema from '@/db/models/UserSchema'
 import { type Transaction, type User } from '@/types/types'
@@ -19,6 +20,7 @@ export const initializeUser = async (): Promise<User> => {
         income: 0,
         outcome: 0,
         balance: 0,
+        lostWithInflation: 0,
         transactions: [],
         categories: [],
         friends: [],
@@ -39,6 +41,7 @@ export const initializeUser = async (): Promise<User> => {
 }
 
 export const getMoney = async (): Promise<{ incomeAmount: number, outcomeAmount: number, balance: number }> => {
+  await connection()
   const { incomeTransactions, outcomeTransactions } = await getIncomeAndOutcomeTransactions()
   if (incomeTransactions.length === 0 && outcomeTransactions.length === 0) {
     return { incomeAmount: 0, outcomeAmount: 0, balance: 0 }
@@ -52,7 +55,11 @@ export const getMoney = async (): Promise<{ incomeAmount: number, outcomeAmount:
       }).reduce((a: number, b: number): number => {
         return a + b
       }),
-      balance: 0
+      balance: 0 - outcomeTransactions.map((transaction: Transaction): number => {
+        return transaction.amount
+      }).reduce((a: number, b: number): number => {
+        return a + b
+      })
     }
   }
   if (outcomeTransactions.length === 0) {
@@ -63,7 +70,11 @@ export const getMoney = async (): Promise<{ incomeAmount: number, outcomeAmount:
         return a + b
       }),
       outcomeAmount: 0,
-      balance: 0
+      balance: incomeTransactions.map((transaction: Transaction): number => {
+        return transaction.amount
+      }).reduce((a: number, b: number): number => {
+        return a + b
+      }) - 0
     }
   }
 
@@ -85,9 +96,32 @@ export const getMoney = async (): Promise<{ incomeAmount: number, outcomeAmount:
 export const updateUserMoney = async (): Promise<{ incomeAmount: number, outcomeAmount: number, balance: number }> => {
   const { incomeAmount, outcomeAmount, balance } = await getMoney()
   try {
+    await connection()
     await UserSchema.findOneAndUpdate({ userID: userId }, { income: incomeAmount, outcome: outcomeAmount, balance })
     revalidatePath('/dashboard')
     return JSON.parse(JSON.stringify({ incomeAmount, outcomeAmount, balance }))
+  } catch (err) {
+    const error = err as Error
+    throw new Error(error.message)
+  }
+}
+
+export const updateLostWithInflation = async (newBalance: number): Promise<void> => {
+  try {
+    await connection()
+    await UserSchema.findOneAndUpdate({ userID: userId }, { lostWithInflation: newBalance })
+    revalidatePath('/dashboard')
+  } catch (err) {
+    const error = err as Error
+    throw new Error(error.message)
+  }
+}
+
+export const getLostWithInflation = async (): Promise<number> => {
+  try {
+    await connection()
+    const user = await UserSchema.findOne({ userID: userId })
+    return user?.lostWithInflation
   } catch (err) {
     const error = err as Error
     throw new Error(error.message)

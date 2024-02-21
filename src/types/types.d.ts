@@ -41,6 +41,7 @@ export interface User {
   income: number
   outcome: number
   balance: number
+  lostWithInflation: number
   transactions: Transaction[]
   categories: Category[]
   friends: string[]
