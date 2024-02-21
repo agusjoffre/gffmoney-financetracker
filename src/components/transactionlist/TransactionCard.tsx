@@ -7,8 +7,15 @@ import {
   PopoverContent,
   PopoverTrigger
 } from '@/components/ui/popover'
+import {
+  Dialog,
+  DialogContent,
+  DialogTrigger
+} from '@/components/ui/dialog'
+
 import { Button } from '../ui/button'
 import { deleteTransaction } from '@/lib/controllers/transactionControl'
+import EditTransaction from './EditTransaction'
 
 interface Props {
   filteredCategory: Category | undefined | null
@@ -66,12 +73,14 @@ const TransactionCard = ({ filteredCategory, transaction }: Props): JSX.Element 
         <div className='flex flex-col gap-2 items-center justify-center'>
           <h1 className='text-lg font-bold text-[var(--light-dark)]'>{transaction?.name}</h1>
           <h2 className='text-lg font-bold text-[var(--pink)]'>{transaction?.type === 'income' ? '+' : '-'} {transaction?.amount.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</h2>
-          <Button className='bg-[var(--sky)] text-[var(--dark)]
-           md:rounded-xl text-base font-medium
+
+              <Button type='button' className='bg-[var(--sky)] text-[var(--dark)]
+                md:rounded-xl text-base font-medium
             hover:bg-sky-100 w-full'>
-            Edit
-          </Button>
-          <Button className='bg-[var(--pink)] text-[var(--dark)]
+                Edit
+            </Button>
+
+          <Button type='button' className='bg-[var(--pink)] text-[var(--dark)]
            md:rounded-xl text-base font-medium
             hover:bg-pink-100 w-full'
           // eslint-disable-next-line @typescript-eslint/no-unsafe-argument

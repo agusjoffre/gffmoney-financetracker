@@ -138,3 +138,20 @@ export const deleteCategory = async (id_: string): Promise<void> => {
     throw new Error(error.message)
   }
 }
+
+export const editTransaction = async (id_: string, formData: FormData): Promise<Transaction> => {
+  try {
+    await connection()
+    const transaction = {
+      name: formData.get('name') as string,
+      type: formData.get('type') as string,
+      amount: Number(formData.get('amount'))
+    }
+    const updatedTransaction = await TransactionSchema.findByIdAndUpdate(id_, transaction, { new: true })
+    revalidatePath('/dashboard')
+    return JSON.parse(JSON.stringify(updatedTransaction))
+  } catch (err) {
+    const error = err as Error
+    throw new Error(error.message)
+  }
+}

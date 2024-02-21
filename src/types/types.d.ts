@@ -1,6 +1,7 @@
 export type TransactionType = 'income' | 'outcome'
 
 export interface Transaction {
+  id: string
   createdAt: string | number | Date
   _id: Key | null | undefined
   userID?: string
