@@ -47,3 +47,9 @@ export interface User {
   projections: Projection[]
   username: string
 }
+
+export interface Currency {
+  code: string
+  inflationRate: number
+  exchangeRate: number
+}
